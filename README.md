@@ -60,7 +60,7 @@ Ensure the following are installed:
 
 #### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/internship-portal.git
+git clone https://github.com/JUMAIL-WM/Internship-Portal.git
 cd internship-portal
 
 composer install
