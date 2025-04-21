@@ -104,7 +104,7 @@ class StudentController extends Controller
             // });
 
             $email_data = $request->email;
-            dispatch(new StudentWelcomeMailJob($email_data));
+            // dispatch(new StudentWelcomeMailJob($email_data));
         }
 
         return redirect('login/student')->with('success', 'Registered Successfully, Now Login !!');
@@ -168,91 +168,160 @@ class StudentController extends Controller
         return view('student.shortlistedInternships', compact('stu'));
     }
 
-    public function showProfile()
-    {
-        $stu = Student::where('id', '=', session('LoggedStu'))->first();
-
-        return view('student.profile', compact('stu'));
-    }
-
     public function updateProfile(Request $request)
     {
         $student = Student::where('id', '=', session('LoggedStu'))->first();
-
+    
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required', Rule::unique('students')->ignore($student->id),
+            'email' => ['required', 'email', Rule::unique('students')->ignore($student->id)],
             'address' => 'required',
             'college_name' => 'required',
             'degree' => 'required',
             'branch' => 'required',
             'pass_year' => 'required',
             'linkedin' => 'required|url',
+            'image' => 'sometimes|image|mimes:jpeg,png|max:1024',
+            'resume' => 'sometimes|file|mimes:pdf,doc,docx|max:2048',
         ]);
-
-        $student->first_name = $request->first_name;
-        $student->last_name = $request->last_name;
-        $student->email = $request->email;
-        $student->mobile = $request->mobile;
-        $student->address = $request->address;
-        $student->linkedin = $request->linkedin;
-
-        if($request->hasFile('image'))
-        {
+    
+        // Update student info
+        $student->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'address' => $request->address,
+            'linkedin' => $request->linkedin,
+        ]);
+    
+        // Handle image upload
+        if($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($student->image && file_exists(public_path('images/student/'.$student->image))) {
+                unlink(public_path('images/student/'.$student->image));
+            }
+    
             $image = $request->file('image');
-            $ext = $image->extension();
-            $image_name =time().'.'.$ext;
+            $image_name = time().'.'.$image->extension();
             $image->move(public_path('images/student'), $image_name);
-            // $image->storeAs('/public/images', $image_name);
-
             $student->image = $image_name;
+            $student->save();
         }
-        else
-        {
-            $student->image = $student->image;
-        }
-
-        if($request->hasFile('resume'))
-        {
-            $image = $request->file('resume');
-            $ext = $image->extension();
-            $resume_name =time().'.'.$ext;
-            $image->move(public_path('resume/student'), $resume_name);
-            // $image->storeAs('/public/images', $image_name);
-
+    
+        // Handle resume upload
+        if($request->hasFile('resume')) {
+            // Delete old resume if exists
+            if ($student->resume && file_exists(public_path('resume/student/'.$student->resume))) {
+                unlink(public_path('resume/student/'.$student->resume));
+            }
+    
+            $resume = $request->file('resume');
+            $resume_name = time().'.'.$resume->extension();
+            $resume->move(public_path('resume/student'), $resume_name);
             $student->resume = $resume_name;
+            $student->save();
         }
-        else
-        {
-            $student->resume = $student->resume;
-        }
-
-        $student->save();
-
+    
+        // Update education
         $education = Education::where('student_id', $student->id)->first();
-
-        $education->college_name = $request->college_name;
-        $education->degree = $request->degree;
-        $education->branch = $request->branch;
-        $education->pass_year = $request->pass_year;
-
-        $ed = $education->save();
-
-
-        if($ed)
-        {
-            $email_data = $request->email;
-            dispatch(new StudentProfileUpdateMailJob($email_data));
-        }
-        else
-        {
-            return back()->with('fail', 'semothing wnent wrong!!');
-        }
-
+        $education->update([
+            'college_name' => $request->college_name,
+            'degree' => $request->degree,
+            'branch' => $request->branch,
+            'pass_year' => $request->pass_year,
+        ]);
+    
         return back()->with('success', 'Profile Updated Successfully!!');
-
     }
+
+    public function showProfile()
+    {
+        $stu = Student::where('id', '=', session('LoggedStu'))->first();
+
+        return view('student.profile', compact('stu'));
+        // return response()->json($stu);
+    }
+
+    // public function updateProfile(Request $request)
+    // {
+    //     $student = Student::where('id', '=', session('LoggedStu'))->first();
+
+    //     $request->validate([
+    //         'first_name' => 'required',
+    //         'last_name' => 'required',
+    //         'email' => 'required', Rule::unique('students')->ignore($student->id),
+    //         'address' => 'required',
+    //         'college_name' => 'required',
+    //         'degree' => 'required',
+    //         'branch' => 'required',
+    //         'pass_year' => 'required',
+    //         'linkedin' => 'required|url',
+    //     ]);
+
+    //     $student->first_name = $request->first_name;
+    //     $student->last_name = $request->last_name;
+    //     $student->email = $request->email;
+    //     $student->mobile = $request->mobile;
+    //     $student->address = $request->address;
+    //     $student->linkedin = $request->linkedin;
+
+    //     if($request->hasFile('image'))
+    //     {
+    //         $image = $request->file('image');
+    //         $ext = $image->extension();
+    //         $image_name =time().'.'.$ext;
+    //         $image->move(public_path('images/student'), $image_name);
+    //         // $image->storeAs('/public/images', $image_name);
+
+    //         $student->image = $image_name;
+    //     }
+    //     else
+    //     {
+    //         $student->image = $student->image;
+    //     }
+
+    //     if($request->hasFile('resume'))
+    //     {
+    //         $image = $request->file('resume');
+    //         $ext = $image->extension();
+    //         $resume_name =time().'.'.$ext;
+    //         $image->move(public_path('resume/student'), $resume_name);
+    //         // $image->storeAs('/public/images', $image_name);
+
+    //         $student->resume = $resume_name;
+    //     }
+    //     else
+    //     {
+    //         $student->resume = $student->resume;
+    //     }
+
+    //     $student->save();
+
+    //     $education = Education::where('student_id', $student->id)->first();
+
+    //     $education->college_name = $request->college_name;
+    //     $education->degree = $request->degree;
+    //     $education->branch = $request->branch;
+    //     $education->pass_year = $request->pass_year;
+
+    //     $ed = $education->save();
+
+
+    //     if($ed)
+    //     {
+    //         $email_data = $request->email;
+    //         dispatch(new StudentProfileUpdateMailJob($email_data));
+    //     }
+    //     else
+    //     {
+    //         return back()->with('fail', 'semothing wnent wrong!!');
+    //     }
+
+    //     return back()->with('success', 'Profile Updated Successfully!!');
+
+    // }
 
     public function showChangePassword()
     {
