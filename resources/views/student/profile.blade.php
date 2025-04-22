@@ -11,80 +11,82 @@
 @section('section')
 <div class="col-lg-9 column">
     <div class="padding-left">
-        <div class="profile-title" id="mp">
-            <h3>My Profile</h3>
-            <div class="upload-img-bar">
-                <span>
-                    <img id="profileImagePreview" src="{{ asset('images/student/' . ($stu->image ?? 'mp1.jpg')) }}" alt="" height="150px" width="150px" style="object-fit: cover; border-radius: 50%;"/>
-                </span>
-                <div class="upload-info">
-                    <input type="file" id="imageUpload" name="image" accept="image/jpeg,image/png" style="display: none;">
-                    <a href="" title="" onclick="event.preventDefault(); document.getElementById('imageUpload').click();">Browse</a>
-                    <span>Max file size is 1MB, Minimum dimension: 270x210, Suitable files are .jpg & .png</span>
-                </div>
-            </div>
-            <div class="profile-completion-container">
-                <div class="circular-progress">
-                    <div class="inner-circle"></div>
-                    <div class="percentage">0%</div>
-                </div>
-                <div class="progress-text">Complete your profile to boost chances</div>
-            </div>
-        </div>
-
-        <style>
-            .profile-completion-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-bottom: 20px;
-                margin-top: 135px;
-            }
-            .circular-progress {
-                position: relative;
-                height: 120px;
-                width: 120px;
-                border-radius: 50%;
-                background: conic-gradient(#1967d2 0deg, #e0e0e0 0deg);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .circular-progress::before {
-                content: "";
-                position: absolute;
-                height: 100px;
-                width: 100px;
-                border-radius: 50%;
-                background-color: white;
-            }
-            .inner-circle {
-                position: absolute;
-                height: 100px;
-                width: 100px;
-                border-radius: 50%;
-                background-color: white;
-                z-index: 1;
-            }
-            .percentage {
-                position: relative;
-                font-size: 24px;
-                font-weight: 600;
-                color: #1967d2;
-                z-index: 2;
-            }
-            .progress-text {
-                margin-top: 15px;
-                font-size: 14px;
-                color: #555;
-                text-align: center;
-                width: 200px;
-            }
-        </style>
+    
         <div class="profile-form-edit">
             <form action="" method="POST" enctype="multipart/form-data">
                @csrf
                @method('PUT')
+               <div class="profile-title" id="mp">
+                <h3>My Profile</h3>
+                <div class="upload-img-bar">
+                    <span>
+                        <img id="profileImagePreview" src="{{ asset('images/student/' . ($stu->image ?? 'mp1.jpg')) }}" alt="" height="150px" width="150px" style="object-fit: cover; border-radius: 50%;"/>
+                    </span>
+                    <div class="upload-info">
+                        <input type="file" id="imageUpload" name="image" accept="image/jpeg,image/png" style="display: none;">
+                        <a href="" title="" onclick="event.preventDefault(); document.getElementById('imageUpload').click();">Browse</a>
+                        <span>Max file size is 1MB, Minimum dimension: 270x210, Suitable files are .jpg & .png</span>
+                    </div>
+                </div>
+                <div class="profile-completion-container">
+                    <div class="circular-progress">
+                        <div class="inner-circle"></div>
+                        <div class="percentage">0%</div>
+                    </div>
+                    <div class="progress-text">Complete your profile to boost chances</div>
+                </div>
+            </div>
+    
+            <style>
+                .profile-completion-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    margin-top: 135px;
+                    margin-right: 100px;
+                }
+                .circular-progress {
+                    position: relative;
+                    height: 120px;
+                    width: 120px;
+                    border-radius: 50%;
+                    background: conic-gradient(#1967d2 0deg, #e0e0e0 0deg);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .circular-progress::before {
+                    content: "";
+                    position: absolute;
+                    height: 100px;
+                    width: 100px;
+                    border-radius: 50%;
+                    background-color: white;
+                }
+                .inner-circle {
+                    position: absolute;
+                    height: 100px;
+                    width: 100px;
+                    border-radius: 50%;
+                    background-color: white;
+                    z-index: 1;
+                }
+                .percentage {
+                    position: relative;
+                    font-size: 24px;
+                    font-weight: 600;
+                    color: #1967d2;
+                    z-index: 2;
+                }
+                .progress-text {
+                    margin-top: 15px;
+                    font-size: 14px;
+                    color: #555;
+                    text-align: center;
+                    width: 200px;
+                }
+            </style>
                 <div class="row">
                    <div class="col-lg-6">
                        <span class="pf-title">First Name</span>
@@ -271,7 +273,10 @@
                '{{ $stu->email }}',
                '{{ $stu->mobile }}',
                '{{ $stu->address }}',
-               '{{ $stu->linkedin }}'
+               '{{ $stu->linkedin }}',
+               '{{ $stu->image }}',
+                
+
            ];
 
            let completedFields = requiredFields.filter(field => field.trim() !== '').length;

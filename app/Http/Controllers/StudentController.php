@@ -170,18 +170,19 @@ class StudentController extends Controller
 
     public function updateProfile(Request $request)
     {
+        // dd($request->all());
         $student = Student::where('id', '=', session('LoggedStu'))->first();
     
         $request->validate([
             'first_name' => 'required',
-            'last_name' => 'required',
+            'last_name' => 'nullable',
             'email' => ['required', 'email', Rule::unique('students')->ignore($student->id)],
-            'address' => 'required',
+            'address' => 'nullable',
             'college_name' => 'required',
             'degree' => 'required',
             'branch' => 'required',
             'pass_year' => 'required',
-            // 'linkedin' => 'required|url',
+            'linkedin' => 'required|url',
             'image' => 'sometimes|image|mimes:jpeg,png|max:1024',
             'resume' => 'sometimes|file|mimes:pdf,doc,docx|max:2048',
         ]);

@@ -67,8 +67,8 @@ class DatabaseSeeder extends Seeder
         DB::table('students')->insert([
             'first_name' => 'Mohammed',
             'last_name' => 'Jumail',
-            'email' => 'jumail@gmail.com',
-            'password' => Hash::make('jumail@1234'),
+            'email' => 'ak@gmail.com',
+            'password' => Hash::make('12345'),
             'mobile' => '1234567890',
             'address' => '627 Earnestine Roads, New Clarabelleport, NC 27996-9496',
             'linkedin' => 'https://student.com',
