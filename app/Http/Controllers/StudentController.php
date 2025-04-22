@@ -181,7 +181,7 @@ class StudentController extends Controller
             'degree' => 'required',
             'branch' => 'required',
             'pass_year' => 'required',
-            'linkedin' => 'required|url',
+            // 'linkedin' => 'required|url',
             'image' => 'sometimes|image|mimes:jpeg,png|max:1024',
             'resume' => 'sometimes|file|mimes:pdf,doc,docx|max:2048',
         ]);
@@ -236,13 +236,49 @@ class StudentController extends Controller
         return back()->with('success', 'Profile Updated Successfully!!');
     }
 
-    public function showProfile()
-    {
-        $stu = Student::where('id', '=', session('LoggedStu'))->first();
+    // public function showProfile()
+    // {
+    //     $stu = Student::where('id', '=', session('LoggedStu'))->first();
 
-        return view('student.profile', compact('stu'));
-        // return response()->json($stu);
+    //     return view('student.profile', compact('stu'));
+    //     // return response()->json($stu);
+    // }
+    
+    public function showProfile()
+{
+    $stu = Student::where('id', '=', session('LoggedStu'))->first();
+    
+    // Calculate profile completion percentage
+    $requiredFields = [
+        'first_name', 'last_name', 'email', 'mobile', 'address', 
+        'linkedin', 'image', 'resume'
+    ];
+    
+    $educationFields = [
+        'college_name', 'degree', 'branch', 'pass_year'
+    ];
+    
+    $completed = 0;
+    
+    foreach ($requiredFields as $field) {
+        if ($field === 'image') {
+            if ($stu->image && $stu->image !== 'mp1.jpg') $completed++;
+        } elseif ($stu->$field) {
+            $completed++;
+        }
     }
+    
+    foreach ($educationFields as $field) {
+        if ($stu->education->$field) {
+            $completed++;
+        }
+    }
+    
+    $totalFields = count($requiredFields) + count($educationFields);
+    $completionPercentage = round(($completed / $totalFields) * 100);
+    
+    return view('student.profile', compact('stu', 'completionPercentage'));
+}
 
     // public function updateProfile(Request $request)
     // {

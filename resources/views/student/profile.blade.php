@@ -15,15 +15,72 @@
             <h3>My Profile</h3>
             <div class="upload-img-bar">
                 <span>
-                    <img id="profileImagePreview" src="{{ asset('images/student/'.($stu->image ?? 'mp1.jpg')) }}" alt="" height="150px" width="150px" style="object-fit: cover; border-radius: 50%;"/>
+                    <img id="profileImagePreview" src="{{ asset('images/student/' . ($stu->image ?? 'mp1.jpg')) }}" alt="" height="150px" width="150px" style="object-fit: cover; border-radius: 50%;"/>
                 </span>
                 <div class="upload-info">
                     <input type="file" id="imageUpload" name="image" accept="image/jpeg,image/png" style="display: none;">
                     <a href="" title="" onclick="event.preventDefault(); document.getElementById('imageUpload').click();">Browse</a>
-                    <span>Max file size is 1MB, Minimum dimension: 270x210 And Suitable files are .jpg & .png</span>
+                    <span>Max file size is 1MB, Minimum dimension: 270x210, Suitable files are .jpg & .png</span>
                 </div>
             </div>
+            <div class="profile-completion-container">
+                <div class="circular-progress">
+                    <div class="inner-circle"></div>
+                    <div class="percentage">0%</div>
+                </div>
+                <div class="progress-text">Complete your profile to boost chances</div>
+            </div>
         </div>
+
+        <style>
+            .profile-completion-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+                margin-top: 135px;
+            }
+            .circular-progress {
+                position: relative;
+                height: 120px;
+                width: 120px;
+                border-radius: 50%;
+                background: conic-gradient(#1967d2 0deg, #e0e0e0 0deg);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .circular-progress::before {
+                content: "";
+                position: absolute;
+                height: 100px;
+                width: 100px;
+                border-radius: 50%;
+                background-color: white;
+            }
+            .inner-circle {
+                position: absolute;
+                height: 100px;
+                width: 100px;
+                border-radius: 50%;
+                background-color: white;
+                z-index: 1;
+            }
+            .percentage {
+                position: relative;
+                font-size: 24px;
+                font-weight: 600;
+                color: #1967d2;
+                z-index: 2;
+            }
+            .progress-text {
+                margin-top: 15px;
+                font-size: 14px;
+                color: #555;
+                text-align: center;
+                width: 200px;
+            }
+        </style>
         <div class="profile-form-edit">
             <form action="" method="POST" enctype="multipart/form-data">
                @csrf
@@ -156,33 +213,6 @@
     </script>
 @endif
 
-<script>
-    document.getElementById('imageUpload').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            // Validate file type
-            if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
-                alert('Only JPG and PNG images are allowed!');
-                this.value = ''; // clear the input
-                return;
-            }
-    
-            // Validate file size (1MB)
-            if (file.size > 1024 * 1024) {
-                alert('Image must be less than 1MB!');
-                this.value = ''; // clear the input
-                return;
-            }
-    
-            // Create preview
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                document.getElementById('profileImagePreview').src = event.target.result;
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-    </script>
 <style>
     .upload-img-bar {
     position: relative;
@@ -207,4 +237,54 @@
     background: #185abc;
 }
 </style>
+<script>
+    document.getElementById('imageUpload').addEventListener('change', function(e) {
+       const file = e.target.files[0];
+       if (file) {
+           // Validate file type
+           if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
+               alert('Only JPG and PNG images are allowed!');
+               this.value = ''; // clear the input
+               return;
+           }
+   
+           // Validate file size (1MB)
+           if (file.size > 1024 * 1024) {
+               alert('Image must be less than 1MB!');
+               this.value = ''; // clear the input
+               return;
+           }
+   
+           // Create preview
+           const reader = new FileReader();
+           reader.onload = function(event) {
+               document.getElementById('profileImagePreview').src = event.target.result;
+           }
+           reader.readAsDataURL(file);
+       }
+   });
+   document.addEventListener('DOMContentLoaded', function() {
+       function calculateProfileCompletion() {
+           const requiredFields = [
+               '{{ $stu->first_name }}',
+               '{{ $stu->last_name }}',
+               '{{ $stu->email }}',
+               '{{ $stu->mobile }}',
+               '{{ $stu->address }}',
+               '{{ $stu->linkedin }}'
+           ];
+
+           let completedFields = requiredFields.filter(field => field.trim() !== '').length;
+
+           const percentage = Math.round((completedFields / requiredFields.length) * 100);
+           const circularProgress = document.querySelector(".circular-progress");
+           const progressValue = document.querySelector(".percentage");
+
+           circularProgress.style.background = `conic-gradient(#1967d2 ${percentage * 3.6}deg, #e0e0e0 0deg)`;
+           progressValue.textContent = `${percentage}%`;
+       }
+
+       calculateProfileCompletion();
+   });
+</script>
 @endsection
