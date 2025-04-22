@@ -33,6 +33,7 @@
                            </a>
                        </div>
                    </div>
+                   
                    <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="p-category">
                         <a href="{{route('student.profile.get')}}" title="">
