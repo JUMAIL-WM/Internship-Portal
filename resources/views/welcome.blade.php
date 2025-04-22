@@ -79,19 +79,18 @@
                                         <h3>The Easiest Way to Get Your Internship</h3>
                                         <span>Find Internship, Employment & Career Opportunities</span>
                                         <form method="GET">
-                                            <div class="row">
-                                                <div class="col-lg-2 col-md-5 col-sm-12 col-xs-12"></div>
-                                                <div class="col-lg-7 col-md-5 col-sm-12 col-xs-12">
-                                                    <div class="job-field">
-                                                        <input type="text" name="search" placeholder="Internship title, keywords or company name" value="{{old('search')}}"  autocomplete="on"/>
-                                                        <i class="la la-keyboard-o"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12">
-                                                    <button type="submit"><i class="la la-search"></i></button>
-                                                </div>
-                                                <div class="col-lg-2 col-md-5 col-sm-12 col-xs-12"></div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-3 col-md-5 col-sm-12 col-xs-12">
+                                                <a href="{{ route('student.register') }}" class="btn btn-primary btn-block">
+                                                    Student Register
+                                                </a>
                                             </div>
+                                            <div class="col-lg-3 col-md-5 col-sm-12 col-xs-12">
+                                                <a href="{{ route('employer.register') }}" class="btn btn-primary btn-block">
+                                                    Employer Register
+                                                </a>
+                                            </div>
+                                        </div>
                                         </form>
                                     </div>
                                 </div>
