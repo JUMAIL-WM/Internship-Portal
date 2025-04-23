@@ -1,6 +1,6 @@
 @extends('student.layout')
 
-@section('student_name', 'Ritik')
+@section('student_name',$stu->name) 
 
 @section('menu_detail')
 

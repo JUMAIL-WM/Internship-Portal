@@ -184,11 +184,11 @@ class EmployerController extends Controller
                 'email' => $request->email,
             );
         
-            // send email with the template
-            Mail::send('emails.profileupdated', $email_data, function ($message) use ($email_data) {
-                $message->to($email_data['email'], $email_data['name'])
-                    ->subject('Your Profile Has Been Updated');
-            });
+            // // send email with the template
+            // Mail::send('emails.profileupdated', $email_data, function ($message) use ($email_data) {
+            //     $message->to($email_data['email'], $email_data['name'])
+            //         ->subject('Your Profile Has Been Updated');
+            // });
         }
 
         return back()->with('success', 'Profile Updated Successfully!!');
@@ -247,7 +247,9 @@ class EmployerController extends Controller
 
     public function showChangePassword()
     {
-        return view('employer.changePassword');
+
+        $emp = Employer::where('id', '=', session('LoggedEmp'))->first();
+        return view('employer.changePassword',compact('emp'));
     }
 
     public function updateChangePassword(Request $request)
