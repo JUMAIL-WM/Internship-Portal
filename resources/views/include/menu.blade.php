@@ -34,7 +34,7 @@
       <ul>
           <li><a href="{{route('student.register')}}" title="">As A Student</a></li>
           <li><a href="{{route('employer.register')}}" title="">As An Employer/Company</a></li>
-          {{-- <li><a href="{{route('admin.login')}}" title="">As An Admin</a></li> --}}
+    
       </ul>
     </li>
     <li class="menu-item-has-children">
@@ -43,6 +43,7 @@
       <ul>
           <li><a onclick="openStudentLogin()" title="">As An Student</a></li>
           <li><a onclick="openEmployerLogin()" title="">As An Employer/Company</a></li>
+          <li><a href="{{route('admin.login')}}" title="">As An Admin</a></li>
       </ul>
     </li>
     @endif

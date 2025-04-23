@@ -72,14 +72,14 @@ class EmployerController extends Controller
                 'email' => $request->email,
             );
         
-            dispatch(function(){
+            // dispatch(function(){
                 
-            });
-            // send email with the template
-            Mail::send('emails.welcome', $email_data, function ($message) use ($email_data) {
-                $message->to($email_data['email'], $email_data['name'])
-                    ->subject('Welcome to JobHunt');
-            }); 
+            // });
+            // // send email with the template
+            // Mail::send('emails.welcome', $email_data, function ($message) use ($email_data) {
+            //     $message->to($email_data['email'], $email_data['name'])
+            //         ->subject('Welcome to JobHunt');
+            // }); 
         }
 
         return redirect('login/employer')->with('success', 'Registered Successfully, Now Login !!');

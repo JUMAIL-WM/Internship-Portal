@@ -6,7 +6,7 @@ use App\Http\Controllers\EmpFPController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InternshipController;
-use App\Http\Controllers\JobController;
+use App\Http\Controllers\StuFPController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\StudentController;
@@ -168,7 +168,7 @@ Route::get('internships/details/{id}', [InternshipController::class, 'internship
 
 // Route::middleware(['admincheck'])->group(function () {
 
-    Route::get('jh-{adminlogin}', [AdminController::class, 'login'])->name('admin.login');
+    Route::get('admin-login', [AdminController::class, 'login'])->name('admin.login');
     Route::post('admin/login', [AdminController::class, 'login_check'])->name('admin.login_check');
 
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');

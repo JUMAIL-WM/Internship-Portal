@@ -35,52 +35,52 @@ class AdminController extends Controller
         return redirect('admin/login')->with('success', 'You have Registered Successfully!!');
     }
 
-    public function login($adminlogin)
+    public function login()
     {
-        $adm = Admin::first();
-        if($adminlogin == $adm->login)
-        {
+        // $adm = Admin::first();
+        // if($adminlogin == $adm->login)
+        // {
             return view('admin.login');
+        // }
+        // else
+        // {
+        //     abort(404);
+        // }
+    }
+
+    public function login_check(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:admins,email',
+            'password'=> 'required',
+        ]);
+
+        $adminInfo = Admin::where('email', '=', $request->email)->first();
+
+        if(!$adminInfo)
+        {
+            return back()->with('fail', 'Credentials Are Wrong, Try Again With Right Credentials!!');
         }
         else
         {
-            abort(404);
+            if(Hash::check($request->password, $adminInfo->password))
+            {
+                $request->session()->put('LoggedAdmin', $adminInfo->id);
+                return redirect('admin/dashboard');
+            }
+            else
+            {
+                return back()->with('fail', 'Credentials Are Wrong, Try Again With Right Credentials!!');
+            }
         }
     }
 
-    // public function login_check(Request $request)
-    // {
-    //     $request->validate([
-    //         'email' => 'required|email|exists:admins,email',
-    //         'password'=> 'required',
-    //     ]);
-
-    //     $adminInfo = Admin::where('email', '=', $request->email)->first();
-
-    //     if(!$adminInfo)
-    //     {
-    //         return back()->with('fail', 'Credentials Are Wrong, Try Again With Right Credentials!!');
-    //     }
-    //     else
-    //     {
-    //         if(Hash::check($request->password, $adminInfo->password))
-    //         {
-    //             $request->session()->put('LoggedAdmin', $adminInfo->id);
-    //             return redirect('admin/dashboard');
-    //         }
-    //         else
-    //         {
-    //             return back()->with('fail', 'Credentials Are Wrong, Try Again With Right Credentials!!');
-    //         }
-    //     }
-    // }
-
     public function dashboard()
     {
-        // if(session()->has('LoggedAdmin'))
-        // {
-        //     $admin = Admin::where('id', '=', session('LoggedAdmin'))->first();
-        // }
+        if(session()->has('LoggedAdmin'))
+        {
+            $admin = Admin::where('id', '=', session('LoggedAdmin'))->first();
+        }
 
         $emp = Employer::orderBy('updated_at', 'desc')->limit(5)->get();
         $int = Internship::orderBy('updated_at', 'desc')->limit(5)->get();
