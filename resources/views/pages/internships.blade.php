@@ -87,13 +87,15 @@
                                                     <div class="job-field">
                                                         <select name="city" class="chosen-city" data-placeholder="City, province or region">
                                                             <option value="">All Locations</option>
-                                                            <option value="Ninthavur" {{ request('city') == 'Ninthavur' ? 'selected' : '' }}>Ninthavur</option>
-                                                            <option value="Kalmunai" {{ request('city') == 'Kalmunai' ? 'selected' : '' }}>Kalmunai</option>
-                                                            <option value="Ampara" {{ request('city') == 'Ampara' ? 'selected' : '' }}>Ampara</option>
-                                                            <option value="Sammanthurai" {{ request('city') == 'Sammanthurai' ? 'selected' : '' }}>Sammanthurai</option>
+                                                            @foreach($cities as $city)
+                                                                <option value="{{ $city }}" {{ request('city') == $city ? 'selected' : '' }}>
+                                                                    {{ $city }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                         <i class="la la-map-marker"></i>
                                                     </div>
+                                                    
                                                 </div>
                                                 <div class="col-lg-1">
                                                     <button type="submit"><i class="la la-search"></i></button>

@@ -188,23 +188,36 @@ class InternshipController extends Controller
     public function internships()
     {
         $internship = Internship::paginate(2);
+        $cities = Employer::select('city')
+        ->whereNotNull('city')
+        ->distinct()
+        ->pluck('city');
 
-        return view('pages.internships', compact('internship'));
+        return view('pages.internships', compact('internship', 'cities'));
     }
 
     public function searchJobs(Request $request)
-        {
-            $query = $request->input('query'); // Capture search term
-            $city = $request->input('city'); // Capture selected city if needed
+    {
+        $query = $request->input('query'); // Capture search term
+        $city = $request->input('city');   // Capture selected city if needed
 
-            // Filter jobs based on user input
-            $internship = Internship::where('title', 'LIKE', '%' . $query . '%')
-                ->orWhere('category', 'LIKE', '%' . $query . '%')
-                ->when($city, function ($queryBuilder) use ($city) {
-                    return $queryBuilder->where('city', $city);
-                })
-                ->paginate(10);
-
-                return view('pages.internships', compact('internship'));
-        }
+        $cities = Employer::select('city')
+        ->whereNotNull('city')
+        ->distinct()
+        ->pluck('city');
+    
+        $internship = Internship::where(function ($q) use ($query) {
+                $q->where('title', 'LIKE', '%' . $query . '%')
+                  ->orWhere('category', 'LIKE', '%' . $query . '%');
+            })
+            ->when($city, function ($q) use ($city) {
+                $q->whereHas('employer', function ($q2) use ($city) {
+                    $q2->where('city', $city);
+                });
+            })
+            ->paginate(10);
+    
+        return view('pages.internships', compact('internship','cities'));
+    }
+    
 }
