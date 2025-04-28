@@ -171,7 +171,7 @@
                                                         <div class="c-logo">
                                                             <!-- Dynamically display company logo (check if logo exists) -->
                                                             @if (isset($recent->employer->logo) && $recent->employer->logo)
-                                                                <img src="/images/employer/{{ $recent->employer->logo }}" alt="Company Logo" />
+                                                                <img src="/images/employer/{{ $recent->employer->logo }}" alt="Company Logo" width=80 />
                                                             @else
                                                                 <img src="/front_asset/images/resource/default-logo.png" alt="Default Logo" />
                                                             @endif
@@ -187,7 +187,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="job-style-bx">
-                                                        <span class="job-is {{ strtolower(str_replace(' ', '-', $recent->type ?? 'full-time')) }}">
+                                                        <span style="color:black"; class="job-is {{ strtolower(str_replace(' ', '-', $recent->type ?? 'full-time')) }}">
                                                             {{ $recent->type ?? 'Full Time' }}
                                                         </span>
                                                         <span class="fav-job"><i class="la la-heart-o"></i></span>
