@@ -55,7 +55,8 @@
                             <ul class="action_job">
                                 <li><span>View Internship</span><a href="/internships/details/{{$item->id}}" target="_blank" title=""><i class="la la-eye"></i></a></li>
                                 <li><span>Edit</span><a href="/employer/internships/edit/{{$item->id}}" title=""><i class="la la-pencil"></i></a></li>
-                                <li><span>Delete</span><a href="/employer/internships/delete/{{$item->id}}" onclick="alert('Are You Sure You want delete this internship')" title=""><i class="la la-trash-o"></i></a></li>
+                                <li><span>Delete</span><a href="javascript:void(0);" onclick="confirmDelete({{$item->id}})" title=""><i class="la la-trash-o"></i></a>
+                                </li>
                             </ul>
                         </td>
                     </tr>
@@ -76,4 +77,27 @@
                 toastr.success("{{ session('success') }}");
     </script>
 @endif
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            // icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to delete URL if confirmed
+                window.location.href = '/employer/internships/delete/' + id;
+            }
+        })
+    }
+    </script>
+    
 @endsection

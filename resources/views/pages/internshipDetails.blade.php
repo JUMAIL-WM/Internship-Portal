@@ -92,7 +92,7 @@
                          <div class="col-lg-8 column">
                              <div class="job-single-sec">
                                  <div class="job-single-head">
-                                     <div class="job-thumb"> <img src="/front_asset/images/resource/sj.png" alt="" /> </div>
+                                     <div class="job-thumb"> <img src="/images/employer/{{ $int->employer->logo }}" alt="" /> </div>
                                      <div class="job-head-info">
                                          <h4>{{$int->employer->name}}</h4>
                                          <span>{{$int->employer->address}} {{$int->employer->city}} {{$int->employer->state}} {{$int->employer->zip_code}}</span>
@@ -103,7 +103,9 @@
                                  </div><!-- Job Head -->
                                  <div class="job-details">
                                      <h3>Job Description</h3>
-                                     <p>Company is a 2016 Iowa City-born start-up that develops consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti.</p>
+                                     <p>{!! $int->description !!}</p>
+                                     {{-- <h3>About Company</h3>
+                                     {{-- <p>Company is a 2016 Iowa City-born start-up that develops consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti.</p>
                                      <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien</p>
                                      <h3>Required Knowledge, Skills, and Abilities</h3>
                                      <ul>
@@ -123,7 +125,7 @@
                                          <li>Excellent communication skills, most notably a demonstrated ability to solicit and address creative and design feedback</li>
                                          <li>Must be able to work under pressure and meet deadlines while maintaining a positive attitude and providing exemplary customer service</li>
                                          <li>Ability to work independently and to carry out assignments to completion within parameters of instructions given, prescribed routines, and standard accepted practices</li>
-                                     </ul>
+                                     </ul> --}}
                                  </div>
                                  <div class="share-bar">
                                      <span>Share</span><a href="#" title="" class="share-fb"><i class="la la-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="la la-twitter"></i></a>
@@ -163,59 +165,37 @@
                                     <h3>Recent Jobs</h3>
                                     <div class="job-list-modern">
                                         <div class="job-listings-sec no-border">
-                                        <div class="job-listing wtabs">
-                                            <div class="job-title-sec">
-                                                <div class="c-logo"> <img src="/front_asset/images/resource/l1.png" alt="" /> </div>
-                                                <h3><a href="#" title="">Web Designer / Developer</a></h3>
-                                                <span>Massimo Artemisis</span>
-                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                            </div>
-                                            <div class="job-style-bx">
-                                                <span class="job-is ft">Full time</span>
-                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                <i>5 months ago</i>
-                                            </div>
+                                            @foreach ($recentInternship as $recent)
+                                                <div class="job-listing wtabs">
+                                                    <div class="job-title-sec">
+                                                        <div class="c-logo">
+                                                            <!-- Dynamically display company logo (check if logo exists) -->
+                                                            @if (isset($recent->employer->logo) && $recent->employer->logo)
+                                                                <img src="/images/employer/{{ $recent->employer->logo }}" alt="Company Logo" />
+                                                            @else
+                                                                <img src="/front_asset/images/resource/default-logo.png" alt="Default Logo" />
+                                                            @endif
+                                                        </div>
+                                                        <h3>
+                                                            <a href="/internships/details/{{$recent->id }}" title="{{ $recent->title }}">
+                                                                {{ $recent->title }}
+                                                            </a>
+                                                        </h3>
+                                                        <span>{{ $recent->employer->name ?? 'Unknown Employer' }}</span>
+                                                        <div class="job-lctn">
+                                                            <i class="la la-map-marker"></i>{{ $recent->employer->address ?? 'Location not specified' }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-style-bx">
+                                                        <span class="job-is {{ strtolower(str_replace(' ', '-', $recent->type ?? 'full-time')) }}">
+                                                            {{ $recent->type ?? 'Full Time' }}
+                                                        </span>
+                                                        <span class="fav-job"><i class="la la-heart-o"></i></span>
+                                                        <i>{{ \Carbon\Carbon::parse($recent->created_at)->diffForHumans() }}</i>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                        <div class="job-listing wtabs">
-                                            <div class="job-title-sec">
-                                                <div class="c-logo"> <img src="/front_asset/images/resource/l2.png" alt="" /> </div>
-                                                <h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-                                                <span>Massimo Artemisis</span>
-                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                            </div>
-                                            <div class="job-style-bx">
-                                                <span class="job-is pt ">Part time</span>
-                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                <i>5 months ago</i>
-                                            </div>
-                                        </div><!-- Job -->
-                                        <div class="job-listing wtabs">
-                                            <div class="job-title-sec">
-                                                <div class="c-logo"> <img src="/front_asset/images/resource/l3.png" alt="" /> </div>
-                                                <h3><a href="#" title="">Regional Sales Manager South</a></h3>
-                                                <span>Massimo Artemisis</span>
-                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                            </div>
-                                            <div class="job-style-bx">
-                                                <span class="job-is ft ">Full time</span>
-                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                <i>5 months ago</i>
-                                            </div>
-                                        </div><!-- Job -->
-                                        <div class="job-listing wtabs">
-                                            <div class="job-title-sec">
-                                                <div class="c-logo"> <img src="/front_asset/images/resource/l4.png" alt="" /> </div>
-                                                <h3><a href="#" title="">Marketing Dairector</a></h3>
-                                                <span>Massimo Artemisis</span>
-                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                            </div>
-                                            <div class="job-style-bx">
-                                                <span class="job-is ft ">Full time</span>
-                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                <i>5 months ago</i>
-                                            </div>
-                                        </div><!-- Job -->
-                                    </div>
                                     </div>
                                 </div>
                              </div>

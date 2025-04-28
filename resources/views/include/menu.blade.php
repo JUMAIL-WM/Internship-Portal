@@ -4,8 +4,12 @@
       <a href="{{route('home')}}" title="">Home</a>
     </li>
     <li class="menu-item-has-children">
+      <a href="{{route('student.dashboard')}}">Dashboard</a>
+    </li>
+    <li class="menu-item-has-children">
       <a href="{{route('internship')}}">Internships</a>
     </li>
+    
 
     @elseif(Session::has('LoggedEmp'))
     <li class="menu-item-has-children">

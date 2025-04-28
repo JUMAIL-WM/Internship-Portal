@@ -71,6 +71,7 @@ Route::get('terms-and-conditions', [PageController::class, 'termcon'])->name('te
 
 Route::get('internships', [InternshipController::class, 'internships'])->name('internship');
 Route::get('internships/details/{id}', [InternshipController::class, 'internshipDetails'])->name('internshipDetails');
+Route::get('/jobs/search', [InternshipController::class, 'searchJobs'])->name('jobs.search');
 
 
 // ***************  Internships Related Routes (End)  *********************************//

@@ -75,21 +75,22 @@
                                 <div class="job-search-sec">
                                     <div class="job-search">
                                         <h4>Explore Thousand Of Jobs With Just Simple Search...</h4>
-                                        <form>
+                                        <form method="GET" action="{{ route('jobs.search') }}">
                                             <div class="row">
                                                 <div class="col-lg-7">
                                                     <div class="job-field">
-                                                        <input type="text" placeholder="Job title, keywords or company name" />
+                                                        <input type="text" name="query" value="{{ request('query') }}" placeholder="Job title, keywords or company name" />
                                                         <i class="la la-keyboard-o"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="job-field">
-                                                        <select data-placeholder="City, province or region" class="chosen-city">
-                                                            <option>Ninthavur</option>
-                                                            <option>Kalmunai</option>
-                                                            <option>Ampara</option>
-                                                            <option>Sammanthurai</option>
+                                                        <select name="city" class="chosen-city" data-placeholder="City, province or region">
+                                                            <option value="">All Locations</option>
+                                                            <option value="Ninthavur" {{ request('city') == 'Ninthavur' ? 'selected' : '' }}>Ninthavur</option>
+                                                            <option value="Kalmunai" {{ request('city') == 'Kalmunai' ? 'selected' : '' }}>Kalmunai</option>
+                                                            <option value="Ampara" {{ request('city') == 'Ampara' ? 'selected' : '' }}>Ampara</option>
+                                                            <option value="Sammanthurai" {{ request('city') == 'Sammanthurai' ? 'selected' : '' }}>Sammanthurai</option>
                                                         </select>
                                                         <i class="la la-map-marker"></i>
                                                     </div>
@@ -131,9 +132,35 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <div class="pagination" style="align-items: center; display:inherit;">
-                                    {!! $internship->links() !!}
-                                </div><!-- Pagination -->
+                                <div class="pagination" style="display: flex; justify-content: center; margin-top: 20px;">
+                                    <ul class="pagination-list" style="list-style: none; padding: 0; display: flex; gap: 8px;">
+                                
+                                        {{-- Previous Page Link --}}
+                                        @if ($internship->onFirstPage())
+                                            <li style="pointer-events: none; opacity: 0.5;"><span style="padding: 8px 14px; border: 1px solid #ccc; border-radius: 5px;">« Previous</span></li>
+                                        @else
+                                            <li><a href="{{ $internship->previousPageUrl() }}" style="padding: 8px 14px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;">« Previous</a></li>
+                                        @endif
+                                
+                                        {{-- Pagination Elements --}}
+                                        @foreach ($internship->getUrlRange(1, $internship->lastPage()) as $page => $url)
+                                            @if ($page == $internship->currentPage())
+                                                <li><span style="background-color: #5e2ced; color: white; padding: 8px 14px; border-radius: 5px;">{{ $page }}</span></li>
+                                            @else
+                                                <li><a href="{{ $url }}" style="padding: 8px 14px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;">{{ $page }}</a></li>
+                                            @endif
+                                        @endforeach
+                                
+                                        {{-- Next Page Link --}}
+                                        @if ($internship->hasMorePages())
+                                            <li><a href="{{ $internship->nextPageUrl() }}" style="padding: 8px 14px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;">Next »</a></li>
+                                        @else
+                                            <li style="pointer-events: none; opacity: 0.5;"><span style="padding: 8px 14px; border: 1px solid #ccc; border-radius: 5px;">Next »</span></li>
+                                        @endif
+                                
+                                    </ul>
+                                </div>
+                                
                              </div>
                         </div>
                         <div class="col-lg-2"></div>

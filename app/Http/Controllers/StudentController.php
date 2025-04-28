@@ -362,7 +362,8 @@ class StudentController extends Controller
 
     public function showChangePassword()
     {
-        return view('student.changePassword');
+        $stu = Student::where('id', '=', session('LoggedStu'))->first();
+        return view('student.changePassword', compact('stu'));
     }
 
     public function updateChangePassword(Request $request)

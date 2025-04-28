@@ -2,6 +2,8 @@
     @include('include.loginpopup')
     
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="/front_asset/js/jquery.min.js" type="text/javascript"></script>
     <script src="/front_asset/js/modernizr.js" type="text/javascript"></script>
     <script src="/front_asset/js/script.js" type="text/javascript"></script>
@@ -43,5 +45,7 @@
         function updateResume() {
           document.getElementById("updateResume").style.display = "none";
         }
+
+      
 
     </script>

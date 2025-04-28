@@ -115,8 +115,15 @@ class InternshipController extends Controller
                             ->where('internship_id', '=', $id)
                             ->where('student_id', '=', session('LoggedStu'))
                             ->exists();
+        //recent jobs
+           // Fetch recent internships excluding the current one
+           $recentInternship = Internship::where('id', '!=', $id)
+           ->orderBy('id', 'DESC')
+           ->take(3)
+           ->get();
 
-        return view('pages.internshipDetails', compact('int', 'applybtn'));
+        // return response()->json( $i);
+        return view('pages.internshipDetails', compact('int', 'applybtn', 'recentInternship'));
 
     }
 
@@ -184,4 +191,20 @@ class InternshipController extends Controller
 
         return view('pages.internships', compact('internship'));
     }
+
+    public function searchJobs(Request $request)
+        {
+            $query = $request->input('query'); // Capture search term
+            $city = $request->input('city'); // Capture selected city if needed
+
+            // Filter jobs based on user input
+            $internship = Internship::where('title', 'LIKE', '%' . $query . '%')
+                ->orWhere('category', 'LIKE', '%' . $query . '%')
+                ->when($city, function ($queryBuilder) use ($city) {
+                    return $queryBuilder->where('city', $city);
+                })
+                ->paginate(10);
+
+                return view('pages.internships', compact('internship'));
+        }
 }

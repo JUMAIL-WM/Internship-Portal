@@ -1,10 +1,10 @@
 @extends('student.layout')
 
-@section('student_name', 'Ritik')
+@section('student_name', $stu->first_name)
 
 @section('menu_detail')
 
-<span><img src="/front_asset/images/resource/mp1.jpg" alt="" /> @yield('student_name') <i class="la la-bars"></i></span>
+<span><img src="/images/student/{{ $stu->image ?? 'mp1.jpg' }}" alt="" height="50px" /> @yield('student_name') <i class="la la-bars"></i></span>
 
 @endsection
 
