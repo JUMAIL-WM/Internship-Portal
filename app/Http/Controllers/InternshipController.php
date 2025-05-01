@@ -126,6 +126,8 @@ class InternshipController extends Controller
         return view('pages.internshipDetails', compact('int', 'applybtn', 'recentInternship'));
 
     }
+    
+    
 
     public function internshipsApply($id)
     {
