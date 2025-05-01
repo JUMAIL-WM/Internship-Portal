@@ -36,11 +36,13 @@
                         <span class="pf-title">Categories</span>
                         <div class="pf-field">
                             <select data-placeholder="Please Select Specialism" name="category" class="chosen">
-                               <option>Select Internship Category</option>
-                               <option value="Web Designing">Web Designing</option>
-                               <option value="Art & Culture">Art & Culture</option>
-                               <option value="Reading & Writing">Reading & Writing</option>
-                           </select>
+                                <option>Select Internship Category</option>
+                                @foreach ($cat as $cat)
+                                    <option value="{{ $cat->name }}" {{ old('category') == $cat->name ? 'selected' : '' }}>
+                                        {{ $cat->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-lg-6">

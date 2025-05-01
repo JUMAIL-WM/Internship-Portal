@@ -48,6 +48,7 @@ class InternshipController extends Controller
         $job->title = $request->title;
         $job->description = $request->description;
         $job->category = $request->category;
+        $job->status = 1; // Set status to 0 (Active)
         $job->salary = $request->salary;
         $job->openings = $request->openings;
         $job->duration = $request->duration;
@@ -221,5 +222,33 @@ class InternshipController extends Controller
     
         return view('pages.internships', compact('internship','cities'));
     }
-    
+
+    // public function index()
+    // {
+    //     // Fetch the first 3 internships to display initially
+    //     $internships = Internship::with('perk', 'employer')
+    //         ->take(3)
+    //         ->get();
+
+    //     // Return the welcome view with internships data
+    //     return view('welcome', compact('internships'));
+    // }
+
+    /**
+     * Load more internships via AJAX request.
+     */
+    public function loadMore(Request $request)
+    {
+        // Number of internships to skip
+        $skip = $request->get('skip', 0);
+
+        // Fetch internships in chunks of 3
+        $internships = Internship::with( 'perk', 'employer')
+            ->skip($skip)
+            ->take(3)
+            ->get();
+
+        // Return internships as JSON response
+        return response()->json($internships);
+    }
 }

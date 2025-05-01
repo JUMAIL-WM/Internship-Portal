@@ -15,7 +15,7 @@
             <h3>Dashboard</h3>
             <div class="extra-job-info">
                 <span><i class="la la-clock-o"></i><strong>{{$emp->internship->count()}}</strong> Internship Posted</span>
-                <span><i class="la la-users"></i><strong>{{$emp->internship->where('status', 0)->count()}}</strong> Active Internship</span>
+                <span><i class="la la-users"></i><strong>{{$emp->internship->where('status', 1)->count()}}</strong> Active Internship</span>
                 <span><i class="la la-users"></i><strong>{{$emp->internship->where('status', 2)->count()}}</strong> Rejected Internship</span>
             </div>
             <table>
@@ -23,7 +23,7 @@
                     <tr>
                         <td>Title</td>
                         <td>Category</td>
-                        <td>Created </td>
+                        <td>Posted on </td>
                         <td>Status</td>
                         <td>Action</td>
                     </tr>
@@ -40,12 +40,13 @@
                             <span class="applied-field">{{$item->category}}</span>
                         </td>
                         <td>
-                            {{-- <span>{{$item->created_at->diffForHumans()}}</span><br /> --}}
+                            <span>{{$item->created_at->diffForHumans() }}</span><br />
+                            {{-- <span class="applied-field">Posted on {{$item->created_at->format('d M Y')}}</span> --}}
                         </td>
                         <td>
-                            @if ($item->status == 1)
+                            @if ($item->status == 0)
                                 <span class="status">Pending</span>
-                            @elseif($item->status == 0)
+                            @elseif($item->status == 1)
                                 <span class="status active">Active</span>
                             @else
                                 <span class="text text-danger">Rejected</span>

@@ -73,6 +73,14 @@ Route::get('internships', [InternshipController::class, 'internships'])->name('i
 Route::get('internships/details/{id}', [InternshipController::class, 'internshipDetails'])->name('internshipDetails');
 Route::get('/jobs/search', [InternshipController::class, 'searchJobs'])->name('jobs.search');
 
+// Route to display welcome page and internships
+// Route::get('/', [InternshipController::class, 'index'])->name('welcome');
+
+// Route for loading more internships dynamically
+Route::get('/internships/load-more', [InternshipController::class, 'loadMore'])->name('internships.loadMore');
+
+// If needed, define an 'internship' route
+// Route::get('/internship', [InternshipController::class, 'index'])->name('internship');
 
 // ***************  Internships Related Routes (End)  *********************************//
 

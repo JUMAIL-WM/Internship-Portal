@@ -271,7 +271,7 @@
             </div>
         </section>
 
-        {{-- <section id="scroll-here">
+        <section id="scroll-here">
             <div class="block">
                 <div class="container">
                     <div class="row">
@@ -307,8 +307,8 @@
                     </div>
                 </div>
             </div>
-        </section> --}}
-        <section>
+        </section>
+        {{-- <section>
             <div class="block">
                 <div class="container">
                     <div class="row">
@@ -395,7 +395,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
         <section>
             <div class="block no-padding">

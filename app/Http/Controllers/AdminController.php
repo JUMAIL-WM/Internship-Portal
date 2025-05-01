@@ -114,7 +114,7 @@ class AdminController extends Controller
 
     public function allInternships()
     {
-        $int = Internship::whereNotIn('status', [1])
+        $int = Internship::whereNotIn('status', [0])
                         ->orderBy('updated_at', 'desc')
                         ->get();
         return view('admin.allInternships', compact('int'));
@@ -122,7 +122,7 @@ class AdminController extends Controller
 
     public function pendingInternships()
     {
-        $int = Internship::where('status', [1])->orderBy('updated_at', 'desc')->get();
+        $int = Internship::where('status', [0])->orderBy('updated_at', 'desc')->get();
         return view('admin.pendingInternships', compact('int'));
     }
 

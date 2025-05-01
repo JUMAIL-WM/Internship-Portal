@@ -20,34 +20,28 @@
                 <div class="profile-title" id="mp">
                     <h3>My Profile</h3>
                     <div class="upload-img-bar">
+                        <div class="circular-progress-container">
+                            <div class="circular-progress" style="--progress: {{ $completionPercentage }};">
+                                <div class="percentage">{{ $completionPercentage }}%</div>
+                            </div>
+                            <span class="progress-text">Complete your profile to boost chances</span>
+                        </div>
+                    </div>
+                    <!-- Image Upload Section -->
+                    <div class="upload-img-bar">
                         <span>
                             <img id="profileImagePreview" src="{{ asset('images/student/' . ($stu->image ?? 'mp1.jpg')) }}" alt="" height="150px" width="150px" style="object-fit: cover; border-radius: 50%;" />
                         </span>
                         <div class="upload-info">
                             <input type="file" id="imageUpload" name="image" accept="image/jpeg,image/png" style="display: none;">
-                            <a href="" title="" onclick="event.preventDefault(); document.getElementById('imageUpload').click();">Browse</a>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('imageUpload').click();">Browse</a>
                             <span>Max file size is 1MB, Minimum dimension: 270x210, Suitable files are .jpg & .png</span>
                         </div>
-                    </div>
-
-                    <div class="profile-completion-container">
-                        <div class="circular-progress">
-                            <div class="inner-circle"></div>
-                            <div class="percentage">0%</div>
-                        </div>
-                        <div class="progress-text">Complete your profile to boost chances</div>
                     </div>
                 </div>
 
                 <style>
-                    .profile-completion-container {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        margin-bottom: 20px;
-                        margin-top: 135px;
-                        margin-right: 100px;
-                    }
+                 
                     .circular-progress {
                         position: relative;
                         height: 120px;

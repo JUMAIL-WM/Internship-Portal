@@ -37,7 +37,7 @@
                                     <span class="badge badge-warning">Pending</span>
                                 </td>
                                 <td>
-                                    <a href="/admin/internships/{{$item->id}}/0"><span class="badge badge-success">Approve</span></a>
+                                    <a href="/admin/internships/{{$item->id}}/1"><span class="badge badge-success">Approve</span></a>
                                 </td>
                                 <td>
                                    <a href="/admin/internships/{{$item->id}}/2"><span class="badge badge-danger">Reject</span></a>

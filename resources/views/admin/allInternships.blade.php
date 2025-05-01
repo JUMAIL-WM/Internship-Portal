@@ -30,9 +30,9 @@
                                 <td>{{$item->category}}</td>
                                 <td>{{$item->updated_at->diffForHumans()}}</td>
                                 <td>
-                                    @if ($item->status == 1)
+                                    @if ($item->status == 0)
                                     <span class="badge badge-warning">Pending</span>
-                                    @elseif($item->status == 0)
+                                    @elseif($item->status == 1)
                                     <span class="badge badge-success">Approved</span>
                                     @elseif($item->status == 2)
                                     <span class="badge badge-danger">Rejected</span>
