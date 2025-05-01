@@ -30,12 +30,12 @@
                                 <th>{{$loop->iteration}}</th>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->email}}</td>
-                                {{-- <td>{{$item->updated_at->diffForHumans()}}</td> --}}
+                                <td>{{$item->updated_at->diffForHumans()}}</td>
                                 <td>
                                     <span class="badge badge-warning">Pending</span>
                                 </td>
                                 <td>
-                                    <a href="/admin/employers/{{$item->id}}/0"><span class="badge badge-success">Approve</span></a>
+                                    <a href="/admin/employers/{{$item->id}}/1"><span class="badge badge-success">Approve</span></a>
                                 </td>
                                 <td>
                                    <a href="/admin/employers/{{$item->id}}/2"><span class="badge badge-danger">Reject</span></a>

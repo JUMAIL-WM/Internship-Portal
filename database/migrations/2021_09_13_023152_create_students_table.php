@@ -21,8 +21,8 @@ class CreateStudentsTable extends Migration
             $table->string('password');
             $table->string('mobile');
             $table->string('address')->nullable();
-            $table->string('linkedin');
-            $table->string('resume');
+            $table->string('linkedin')->nullable();
+            $table->string('resume')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

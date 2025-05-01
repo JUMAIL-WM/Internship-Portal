@@ -104,7 +104,7 @@
                     </div>
         
                     <div class="col-lg-12" style="margin-bottom:25px;">
-                        @if ($emp->status == 0)
+                        @if ($emp->status == 1)
                             <button type="submit">Post Internship</button>
                         @else
                             <button disabled>Not Allowed to Post</button>

@@ -17,7 +17,7 @@ class CreateInternshipsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('employer_id');
             $table->string('title');
-            $table->string('description');
+            $table->string('description', 2500);
             $table->string('category');
             $table->string('salary');
             $table->string('openings');

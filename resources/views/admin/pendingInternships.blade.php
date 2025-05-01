@@ -30,7 +30,7 @@
                                 <th>{{$loop->iteration}}</th>
                                 <td>{{$item->title}}</td>
                                 <td>{{$item->category}}</td>
-                                {{-- <td>{{$item->updated_at->diffForHumans()}}</td> --}}
+                                <td>{{$item->updated_at->diffForHumans()}}</td>
                                 <td>
                                     <span class="badge badge-warning">Pending</span>
                                 </td>

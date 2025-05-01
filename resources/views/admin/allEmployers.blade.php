@@ -28,11 +28,13 @@
                                 <th>{{$loop->iteration}}</th>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->email}}</td>
-                                <td>{{$item->updated_at->diffForHumans()}}</td>
                                 <td>
-                                    @if ($item->status == 1)
+                                    {{ $item->updated_at ? $item->updated_at->diffForHumans() : 'N/A' }}
+                                </td>
+                                <td>
+                                    @if ($item->status == 0)
                                     <span class="badge badge-warning">Pending</span>
-                                    @elseif($item->status == 0)
+                                    @elseif($item->status == 1)
                                     <span class="badge badge-success">Approved</span>
                                     @elseif($item->status == 2)
                                     <span class="badge badge-danger">Rejected</span>

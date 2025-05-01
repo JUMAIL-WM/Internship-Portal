@@ -35,14 +35,14 @@ class StudentController extends Controller
             'email' => 'required|unique:students,email',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required',
-            'address' => 'required',
-            'college_name' => 'required',
-            'degree' => 'required',
-            'branch' => 'required',
-            'pass_year' => 'required',
-            'linkedin' => 'required|url',
-            'image' => 'required|mimes:jpg,png,jpeg',
-            'resume' => 'required|mimes:pdf,docx',
+            // 'address' => 'required',
+            // 'college_name' => 'required',
+            // 'degree' => 'required',
+            // 'branch' => 'required',
+            // 'pass_year' => 'required',
+            // 'linkedin' => 'required|url',
+            // 'image' => 'required|mimes:jpg,png,jpeg',
+            // 'resume' => 'required|mimes:pdf,docx',
         ]);
 
         $student = new Student();
@@ -90,25 +90,25 @@ class StudentController extends Controller
 
         $save = $student->education()->save($education);
 
-        if($save)
-        {
-            // $email_data = array(
-            //     'name' => $request->name,
-            //     'email' => $request->email,
-            // );
+        // if($save)
+        // {
+        //     // $email_data = array(
+        //     //     'name' => $request->name,
+        //     //     'email' => $request->email,
+        //     // );
         
-            // send email with the template
-            // Mail::send('emails.welcomestu', $email_data, function ($message) use ($email_data) {
-            //     $message->to($email_data['email'], $email_data['name'])
-            //         ->subject('Welcome to JobHunt');
-            // });
+        //     // send email with the template
+        //     // Mail::send('emails.welcomestu', $email_data, function ($message) use ($email_data) {
+        //     //     $message->to($email_data['email'], $email_data['name'])
+        //     //         ->subject('Welcome to JobHunt');
+        //     // });
 
-            $email_data = $request->email;
-            // dispatch(new StudentWelcomeMailJob($email_data));
-        }
+        //     $email_data = $request->email;
+        //     // dispatch(new StudentWelcomeMailJob($email_data));
+        // }
 
         return redirect('login/student')->with('success', 'Registered Successfully, Now Login !!');
-    }
+    }  
 
     public function login()
     {
@@ -246,41 +246,44 @@ class StudentController extends Controller
     // }
     
     public function showProfile()
-{
-    $stu = Student::where('id', '=', session('LoggedStu'))->first();
+    {
+        $stu = Student::with('education')->where('id', session('LoggedStu'))->first();
     
-    // Calculate profile completion percentage
-    $requiredFields = [
-        'first_name', 'last_name', 'email', 'mobile', 'address', 
-        'linkedin', 'image', 'resume'
-    ];
+        $requiredFields = [
+            'first_name', 'last_name', 'email', 'mobile', 'address', 
+            'linkedin', 'image', 'resume'
+        ];
     
-    $educationFields = [
-        'college_name', 'degree', 'branch', 'pass_year'
-    ];
+        $educationFields = [
+            'college_name', 'degree', 'branch', 'pass_year'
+        ];
     
-    $completed = 0;
+        $completed = 0;
     
-    foreach ($requiredFields as $field) {
-        if ($field === 'image') {
-            if ($stu->image && $stu->image !== 'mp1.jpg') $completed++;
-        } elseif ($stu->$field) {
-            $completed++;
+        foreach ($requiredFields as $field) {
+            if ($field === 'image') {
+                if ($stu->image && $stu->image !== 'mp1.jpg') {
+                    $completed++;
+                }
+            } elseif (!empty($stu->$field)) {
+                $completed++;
+            }
         }
+    
+        if ($stu->education) {
+            foreach ($educationFields as $field) {
+                if (!empty($stu->education->$field)) {
+                    $completed++;
+                }
+            }
+        }
+    
+        $totalFields = count($requiredFields) + count($educationFields);
+        $completionPercentage = round(($completed / $totalFields) * 100);
+    
+        return view('student.profile', compact('stu', 'completionPercentage'));
     }
     
-    foreach ($educationFields as $field) {
-        if ($stu->education->$field) {
-            $completed++;
-        }
-    }
-    
-    $totalFields = count($requiredFields) + count($educationFields);
-    $completionPercentage = round(($completed / $totalFields) * 100);
-    
-    return view('student.profile', compact('stu', 'completionPercentage'));
-}
-
     // public function updateProfile(Request $request)
     // {
     //     $student = Student::where('id', '=', session('LoggedStu'))->first();

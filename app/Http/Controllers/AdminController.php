@@ -89,15 +89,17 @@ class AdminController extends Controller
 
     public function allEmployers()
     {
-        $emp = Employer::whereNotIn('status', [1])
+        $emp = Employer::whereNotIn('status', [0])
                         ->orderBy('updated_at', 'desc')
                         ->get();
+        
         return view('admin.allEmployers', compact('emp'));
+        // return response()->json($emp);
     }
 
     public function pendingEmployers()
     {
-        $emp = Employer::where('status', [1])->orderBy('updated_at', 'desc')->get();
+        $emp = Employer::where('status', [0])->orderBy('updated_at', 'desc')->get();
         return view('admin.pendingEmployers', compact('emp'));
     }
 

@@ -9,7 +9,13 @@ class Education extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['college_name', 'degree', 'branch', 'pass_year',];
+    protected $fillable = [
+        'student_id',
+        'college_name',
+        'degree',
+        'branch',
+        'pass_year',
+    ];
 
     public function student()
     {

@@ -73,7 +73,7 @@
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-lg-6">
+                                        {{-- <div class="col-lg-6">
                                             <span class="pf-title">Address</span>
                                             <div class="pf-field">
                                                 <input type="text" name="address" placeholder="HIG-87, Collins Street West, Bhopal, MP, India" />
@@ -163,7 +163,7 @@
                                             @error('resume')
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
-                                        </div> 
+                                        </div>  --}}
                                         <div class="col-lg-12">
                                             <button type="submit" style="margin-bottom: 25px;">Register</button>
                                         </div>
