@@ -158,4 +158,15 @@ class AdminController extends Controller
         return back();
     }
 
+    //logout function
+
+    public function logout()
+    {
+        if(session()->has('LoggedAdmin'))
+        {
+            session()->pull('LoggedAdmin');
+            return redirect('admin-login')->with('success', 'You have logged out successfully!!');
+        }
+    }
+
 }

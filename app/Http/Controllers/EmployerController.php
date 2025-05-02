@@ -253,7 +253,7 @@ class EmployerController extends Controller
     }
 
     public function updateChangePassword(Request $request)
-    {l
+    {
         $request->validate([
             'old_password' => 'min:6|required',
             'password' => 'min:6,confirmed,required_with:password_confirmation',

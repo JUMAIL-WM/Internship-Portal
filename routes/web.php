@@ -175,7 +175,7 @@ Route::get('/internships/load-more', [InternshipController::class, 'loadMore'])-
 
 // ***************  Admin Routes (start)  *********************************//
 
-// Route::middleware(['admincheck'])->group(function () {
+Route::middleware(['admincheck'])->group(function () {
 
     Route::get('admin-login', [AdminController::class, 'login'])->name('admin.login');
     Route::post('admin/login', [AdminController::class, 'login_check'])->name('admin.login_check');
@@ -206,5 +206,7 @@ Route::get('/internships/load-more', [InternshipController::class, 'loadMore'])-
     Route::get('admin/profile', [AdminController::class, 'adminProfile'])->name('admin.adminProfile');
     Route::put('admin/profile/change-login-url', [AdminController::class, 'adminChangeLoginURL'])->name('admin.adminChangeLoginURL');
 
-// });
+    Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+});
+
 // ***************  Admin Routes (End)  *********************************//

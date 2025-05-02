@@ -29,7 +29,9 @@
                                 <td>{{$item->first_name}} {{$item->last_name}}</td>
                                 <td>{{$item->email}}</td>
                                 <td><a href="{{$item->linkedin}}" class="text text-primary">Profile</a></td>
-                                {{-- <td>{{$item->updated_at->diffForHumans()}}</td> --}}
+                                <td>
+                                    {{ $item->updated_at ? $item->updated_at->diffForHumans() : 'N/A' }}
+                                </td>
                                 <td>
                                     <span>
                                         <a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="View">

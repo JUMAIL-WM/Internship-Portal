@@ -159,7 +159,7 @@
                                         <span class="ml-2">Inbox </span>
                                     </a>
                                     <form action="" method="post">
-                                        <a href="/admin_asset/page-login.html" method='post' class="dropdown-item">
+                                        <a href="{{route('admin.logout')}}" class="dropdown-item">
                                             <i class="icon-key"></i>
                                             <span type="submit" class="ml-2">Logout </span>
                                         </a>

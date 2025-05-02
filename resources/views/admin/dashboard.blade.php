@@ -9,7 +9,7 @@
             <div class="stat-widget-two card-body">
                 <div class="stat-content">
                     <div class="stat-text">Total Employers</div>
-                    <div class="stat-digit"> <i class="fa fa-users"></i>{{App\Models\Employer::whereNotIn('status', [1])->count()}}</div>
+                    <div class="stat-digit"> <i class="fa fa-users"></i>{{App\Models\Employer::whereNotIn('status', [0])->count()}}</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-success w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -22,7 +22,7 @@
             <div class="stat-widget-two card-body">
                 <div class="stat-content">
                     <div class="stat-text">Total Internships</div>
-                    <div class="stat-digit"> <i class="fa fa-tag"></i>{{App\Models\Internship::whereNotIn('status', [1])->count()}}</div>
+                    <div class="stat-digit"> <i class="fa fa-tag"></i>{{App\Models\Internship::whereNotIn('status', [0])->count()}}</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-primary w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -83,9 +83,9 @@
                                     <td>{{$item->name}}</td>
                                     <td><span>{{$item->email}}</span></td>
                                     <td>
-                                        @if ($item->status == 1)
+                                        @if ($item->status == 0)
                                         <span class="badge badge-warning">Pending</span>
-                                        @elseif($item->status == 0)
+                                        @elseif($item->status == 1)
                                         <span class="badge badge-success">Approved</span>
                                         @elseif($item->status == 2)
                                         <span class="badge badge-danger">Rejected</span>
@@ -124,9 +124,9 @@
                                     <td><span>{{$item->category}}</span></td>
                                     <td><span>{{$item->last_date}}</span></td>
                                     <td>
-                                        @if ($item->status == 1)
+                                        @if ($item->status == 0)
                                         <span class="badge badge-warning">Pending</span>
-                                        @elseif($item->status == 0)
+                                        @elseif($item->status == 1)
                                         <span class="badge badge-success">Approved</span>
                                         @elseif($item->status == 2)
                                         <span class="badge badge-danger">Rejected</span>
