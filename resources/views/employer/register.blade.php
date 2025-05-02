@@ -55,24 +55,97 @@
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
 					 					</div>
-					 					<div class="col-lg-6">
+                                         <div class="col-lg-6">
                                             <span class="pf-title">Password</span>
-                                            <div class="pf-field">
-                                                <input type="password" name="password" placeholder="**************" />
+                                            <div class="pf-field position-relative">
+                                                <input type="password" id="password" name="password" placeholder="**************" />
+                                                <span id="togglePassword" class="password-toggle-icon" style="cursor: pointer;">
+                                                    <i id="passwordIcon" class="fas fa-eye"></i>
+                                                </span>
                                             </div>
                                             @error('password')
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        
                                         <div class="col-lg-6">
                                             <span class="pf-title">Confirm Password</span>
-                                            <div class="pf-field">
-                                                <input type="password" name="confirm_password" placeholder="**************" />
+                                            <div class="pf-field position-relative">
+                                                <input type="password" id="confirm_password" name="confirm_password" placeholder="**************" />
+                                                <span id="toggleConfirmPassword" class="password-toggle-icon" style="cursor: pointer;">
+                                                    <i id="confirmPasswordIcon" class="fas fa-eye"></i>
+                                                </span>
                                             </div>
                                             @error('confirm_password')
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+
+                                        <style>
+                                        /* General Input Field Styling */
+                                        .pf-field {
+                                            display: flex;
+                                            align-items: center; /* Vertically center the elements */
+                                            position: relative;
+                                        }
+
+                                        .pf-field input {
+                                            width: 100%;
+                                            padding: 0.8rem 3rem 0.8rem 1rem; /* Add padding for the icon area */
+                                            border: 1px solid #ccc;
+                                            border-radius: 5px;
+                                            font-size: 14px;
+                                        }
+
+                                        .password-toggle-icon {
+                                            position: absolute;
+                                            right: 1rem; /* Adjust as needed */
+                                            top: 50%;
+                                            transform: translateY(-50%);
+                                            cursor: pointer;
+                                            color: #777; /* Icon color */
+                                            transition: color 0.3s ease; /* Smooth hover effect */
+                                        }
+
+                                        .password-toggle-icon:hover {
+                                            color: #1967d2; /* Hover color */
+                                        }
+
+                                        /* Responsive Design */
+                                        @media (max-width: 768px) {
+                                            .pf-field input {
+                                                padding: 0.6rem 2rem 0.6rem 1rem; /* Adjust padding for smaller screens */
+                                            }
+                                        }
+                                        </style>
+                                        
+                                        <script>
+                                                                                // Toggle password visibility for "Password" field
+                                        document.getElementById('togglePassword').addEventListener('click', function () {
+                                            const passwordField = document.getElementById('password');
+                                            const passwordIcon = document.getElementById('passwordIcon');
+                                            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                                            passwordField.setAttribute('type', type);
+
+                                            // Toggle icon
+                                            passwordIcon.classList.toggle('fa-eye');
+                                            passwordIcon.classList.toggle('fa-eye-slash');
+                                        });
+
+                                        // Toggle password visibility for "Confirm Password" field
+                                        document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+                                            const confirmPasswordField = document.getElementById('confirm_password');
+                                            const confirmPasswordIcon = document.getElementById('confirmPasswordIcon');
+                                            const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                                            confirmPasswordField.setAttribute('type', type);
+
+                                            // Toggle icon
+                                            confirmPasswordIcon.classList.toggle('fa-eye');
+                                            confirmPasswordIcon.classList.toggle('fa-eye-slash');
+                                        });
+                                        </script>
+                                        <!-- Include Font Awesome for Icons -->
+                                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
                                         <div class="col-lg-6">
                                             <span class="pf-title">Address</span>
                                             <div class="pf-field">

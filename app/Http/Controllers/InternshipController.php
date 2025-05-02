@@ -147,7 +147,8 @@ class InternshipController extends Controller
     {
         $int = Internship::find($id);
         $emp = Employer::where('id', '=', session('LoggedEmp'))->first();
-        return view('employer.editInternship', compact('int', 'emp'));
+        $cat = Category::where('status', '1')->get();
+        return view('employer.editInternship', compact('int', 'emp','cat'));
     }
 
     public function updateInternship(Request $request, $id)

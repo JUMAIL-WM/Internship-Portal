@@ -1,28 +1,29 @@
 @extends('pages.layout')
 
 @section('page_title', 'Register')
-    
+
 
 @section('section')
 
-<section>
-		<div class="block no-padding">
-			<div class="container">
-				 <div class="row no-gape">
+    <section>
+        <div class="block no-padding">
+            <div class="container">
+                <div class="row no-gape">
                     <div class="col-lg-2"></div>
-				 	<div class="col-lg-8 column">
-				 		<div class="padding-left">
-					 		<div class="profile-title">
-					 			<h3>Register as an Student</h3>
-					 		</div>
-					 		<div class="profile-form-edit">
-					 			<form action="" method="POST" enctype="multipart/form-data">
+                    <div class="col-lg-8 column">
+                        <div class="padding-left">
+                            <div class="profile-title">
+                                <h3>Register as an Student</h3>
+                            </div>
+                            <div class="profile-form-edit">
+                                <form action="" method="POST" enctype="multipart/form-data">
                                     @csrf
-					 				<div class="row">
+                                    <div class="row">
                                         <div class="col-lg-6">
                                             <span class="pf-title">First Name</span>
                                             <div class="pf-field">
-                                                <input type="text" name="first_name" placeholder="John" />
+                                                <input type="text" name="first_name" placeholder="John"
+                                                    value="{{ old('first_name') }}" />
                                             </div>
                                             @error('first_name')
                                                 <div class="text text-danger">{{ $message }}</div>
@@ -31,31 +32,34 @@
                                         <div class="col-lg-6">
                                             <span class="pf-title">Last Name</span>
                                             <div class="pf-field">
-                                                <input type="text" name="last_name" placeholder="Doe" />
+                                                <input type="text" name="last_name" placeholder="Doe"
+                                                    value="{{ old('last_name') }}" />
                                             </div>
                                             @error('last_name')
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-					 					<div class="col-lg-6">
-					 						<span class="pf-title">Email ID</span>
-					 						<div class="pf-field">
-					 							<input type="email" name="email" placeholder="john@doe.com" />
-					 						</div>
+                                        <div class="col-lg-6">
+                                            <span class="pf-title">Email ID</span>
+                                            <div class="pf-field">
+                                                <input type="email" name="email" placeholder="john@doe.com"
+                                                    value="{{ old('email') }}" />
+                                            </div>
                                             @error('email')
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
-					 					</div>
-					 					<div class="col-lg-6">
-					 						<span class="pf-title">Contact Number</span>
-					 						<div class="pf-field">
-					 							<input type="text" name="mobile" placeholder="9285471584" />
-					 						</div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <span class="pf-title">Contact Number</span>
+                                            <div class="pf-field">
+                                                <input type="text" name="mobile" placeholder="9285471584"
+                                                    value="{{ old('mobile') }}" />
+                                            </div>
                                             @error('mobile')
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
-					 					</div>
-					 					<div class="col-lg-6">
+                                        </div>
+                                        <div class="col-lg-6">
                                             <span class="pf-title">Password</span>
                                             <div class="pf-field">
                                                 <input type="password" name="password" placeholder="**************" />
@@ -67,12 +71,14 @@
                                         <div class="col-lg-6">
                                             <span class="pf-title">Confirm Password</span>
                                             <div class="pf-field">
-                                                <input type="password" name="password_confirmation" placeholder="**************" />
+                                                <input type="password" name="password_confirmation"
+                                                    placeholder="**************" />
                                             </div>
                                             @error('password_confirmation')
                                                 <div class="text text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         {{-- <div class="col-lg-6">
                                             <span class="pf-title">Address</span>
                                             <div class="pf-field">
@@ -167,15 +173,15 @@
                                         <div class="col-lg-12">
                                             <button type="submit" style="margin-bottom: 25px;">Register</button>
                                         </div>
-					 				</div>
-					 			</form>
-					 		</div>
-					 	</div>
-					</div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-2"></div>
-				 </div>
-			</div>
-		</div>
-	</section>
+                </div>
+            </div>
+        </div>
+    </section>
 
 @endsection
