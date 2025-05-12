@@ -8,15 +8,15 @@
                             <div class="logo">
                                 <a href="/" title=""><img src="/front_asset/images/resource/logo 7.png" alt="" /></a>
                             </div>
-                            <span>Ninthavur</span>
-                            <span>0760527243</span>
-                            <span>jumail@gmail.com</span>
+                            <span>ideaGeek
+                                29A, Wajirawansa Mawatha, Obeysekerapura, Rajagiriya, 10100, LK</span>
+                            <span>+94740014335</span>
+                            <span>jhello@ideageek.net</span>
                             <div class="social">
-                                <a href="#" title=""><i class="la la-facebook"></i></a>
-                                <a href="#" title=""><i class="la la-twitter"></i></a>
-                                <a href="#" title=""><i class="la la-linkedin"></i></a>
-                                <a href="#" title=""><i class="la la-pinterest"></i></a>
-                                <a href="#" title=""><i class="la la-behance"></i></a>
+                                <a href="https://www.facebook.com/ideaGeek.net/" title=""><i class="la la-facebook"></i></a>
+                                <a href="https://x.com/ideageekNet" title=""><i class="la la-twitter"></i></a>
+                                <a href="https://www.linkedin.com/company/ideageek/" title=""><i class="la la-linkedin"></i></a>
+                                <a href="https://www.instagram.com/ideageeknet/" title=""><i class="la la-instagram"></i></a>
                             </div>
                         </div>
                         <!-- About Widget -->
@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="bottom-line">
-        <span> Used Only for Learning Purpose by <a href="https://github.com/JUMAIL-WM" style="color:white;" target="_blank"> Mohammed Jumail </a>. Copyright © Design by <a href="https://digizen.lk/" style="color:white;" target="_blank">Digizen</a></span>
+        <span> © 2025 digizen. All rights reserved | ideated and initiated by  <a href="https://ideageek.net" style="color:white;" target="_blank"> IdeaGeek </a></span>
         <a href="#scrollup" class="scrollup" title=""><i class="la la-arrow-up"></i></a>
     </div>
 </footer>
