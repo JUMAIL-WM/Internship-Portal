@@ -11,7 +11,7 @@
                             <span>ideaGeek
                                 29A, Wajirawansa Mawatha, Obeysekerapura, Rajagiriya, 10100, LK</span>
                             <span>+94740014335</span>
-                            <span>jhello@ideageek.net</span>
+                            <span>hello@ideageek.net</span>
                             <div class="social">
                                 <a href="https://www.facebook.com/ideaGeek.net/" title=""><i class="la la-facebook"></i></a>
                                 <a href="https://x.com/ideageekNet" title=""><i class="la la-twitter"></i></a>
