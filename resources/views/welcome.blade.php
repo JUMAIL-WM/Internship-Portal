@@ -169,7 +169,7 @@
                                             <a href="#" title="">
 											<i class="la la-bullhorn"></i>
 											<span>Design, Art & Multimedia</span>
-											<p>(22 open positions)</p>
+											<p>(25 open positions)</p>
 										</a>
                                         </div>
                                     </div>
